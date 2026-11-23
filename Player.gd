@@ -27,7 +27,6 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, 
 			deg_to_rad(-70), deg_to_rad(60))
 func _physics_process(delta: float) -> void:
-
 	if Input.is_key_pressed(KEY_ESCAPE):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if Input.is_key_pressed(KEY_TAB):
@@ -72,7 +71,7 @@ func crouching(delta):
 	if Input.is_key_pressed(KEY_C) and is_on_floor():
 		crouch = 1
 		resistance = 0.5
-		target_height = -2
+		target_height = -1.5
 	else:
 		crouch = 0
 		resistance = 1

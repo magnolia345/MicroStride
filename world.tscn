@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cltn8vp0kv3ci" path="res://Player.gd" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://bbfj3yrl4srjj" path="res://Brick.jpg" id="2_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://6k3jrsshqkqn" path="res://Brick2.jpg" id="3_tlwt5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,6 +22,11 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnw4l"]
 albedo_texture = ExtResource("2_fj7yv")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqk2v"]
+albedo_texture = ExtResource("3_tlwt5")
 uv1_scale = Vector3(0.2, 0.2, 0.2)
 uv1_triplanar = true
 
@@ -62,7 +68,7 @@ size = Vector3(20.843018, 0.383667, 6.9039)
 
 [node name="Wall90" type="CSGCombiner3D" parent="." unique_id=1728322002]
 transform = Transform3D(-4.371139e-08, -1, 0, -4.371139e-08, 1.9106855e-15, -1, 1, -4.371139e-08, -4.371139e-08, -7.693008, 3.1768575, 1.5504341)
-material_override = SubResource("StandardMaterial3D_nnw4l")
+material_override = SubResource("StandardMaterial3D_aqk2v")
 
 [node name="Wall1" type="CSGBox3D" parent="Wall90" unique_id=1859521289]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 10.214051, 2.1185317, -4.7683716e-07)
