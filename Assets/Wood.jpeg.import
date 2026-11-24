@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbfj3yrl4srjj"
-path.s3tc="res://.godot/imported/Brick.jpg-e9dd03f79aa369dc70f8eca6ed11c8fb.s3tc.ctex"
+uid="uid://csfjbimh3ptw"
+path.s3tc="res://.godot/imported/Wood.jpeg-82d455f8a66adbf44a17b785a2687419.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Brick.jpg"
-dest_files=["res://.godot/imported/Brick.jpg-e9dd03f79aa369dc70f8eca6ed11c8fb.s3tc.ctex"]
+source_file="res://Assets/Wood.jpeg"
+dest_files=["res://.godot/imported/Wood.jpeg-82d455f8a66adbf44a17b785a2687419.s3tc.ctex"]
 
 [params]
 

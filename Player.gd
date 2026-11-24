@@ -1,19 +1,23 @@
 extends CharacterBody3D
 
-const JUMP_VELOCITY = 3.5
+const JUMP_VELOCITY = 4
 const sensitivity = 0.003
 const BOB_FREQ: float = 3.0
 const BOB_AMP: float = 0.08
 
-var SPEED = 5.0
+var SPEED = 3
 var crouch = 0
 var t_bob: float = 0.0
 var resistance = 1.0
 var cam_height = 1.5
 var current_bob = Vector3.ZERO
-var is_third_person = false
+var is_third_person = true
 var third_person_distance = 1.2
 var turn_timer: float = 0.0
+var held_object = null
+# Add these variables near the top of your player script
+var sync_position: Vector3 = Vector3.ZERO
+var sync_rotation: float = 0.0
 
 @onready var head: Node3D = $Head
 @onready var spring_arm: SpringArm3D = $Head/SpringArm3D
@@ -21,28 +25,32 @@ var turn_timer: float = 0.0
 @onready var mesh = $Node3D/Sketchfab_Scene
 @onready var model_pivot: Node3D = $Node3D
 @onready var animation: AnimationPlayer = $Node3D/Sketchfab_Scene/AnimationPlayer
-
+@onready var raycast = $Head/SpringArm3D/Camera3D/RayCast3D
+@export var tools: Node3D
+@export var gravity: float = 20.0
+@export var fall_multiplier: float = 1.5
 func _ready() -> void:
 	spring_arm.add_excluded_object(get_rid())
 	spring_arm.margin = 0.3
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	update_camera_mode()
-
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"): # Escape key
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * sensitivity)
-		model_pivot.rotation.y = head.rotation.y
-		
 		spring_arm.rotate_x(-event.relative.y * sensitivity)
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-40), deg_to_rad(20))
 		
-		if abs(event.relative.x) > 3.0 and abs(event.relative.x) > abs(event.relative.y):
-			turn_timer = 0.15
-	
-	if event is InputEventKey and event.pressed and event.keycode == KEY_V:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_V and not event.is_echo():
 		is_third_person = not is_third_person
 		update_camera_mode()
-
+	if Input.is_key_pressed(KEY_E) and not event.is_echo():
+		if tools.is_ancestor_of(raycast.get_collider()):
+			raycast.get_collider().hide()
+			held_object = raycast.get_collider
 func update_camera_mode() -> void:
 	if is_third_person:
 		spring_arm.spring_length = third_person_distance
@@ -70,9 +78,14 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED * resistance
 		velocity.z = direction.z * SPEED * resistance
+		
+		# Faces forward on W, 90° left on A, 90° right on D, and 180° back on S
+		var target_angle = atan2(-direction.x, -direction.z)
+		model_pivot.rotation.y = lerp_angle(model_pivot.rotation.y, target_angle, delta * 12.0)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+
 
 	move_and_slide()
 
@@ -85,8 +98,8 @@ func _physics_process(delta: float) -> void:
 			animation.play("HamsterALL_Run", 0.15)
 	else:
 		if animation.has_animation("HamsterALL_Idle"):
-			if animation.current_animation != "HamsterALL_Idle":
-				animation.play("HamsterALL_Idle", 0.2)
+			if animation.current_animation != "HamsterALL_TPOSE":
+				animation.play("HamsterALL_TPOSE", 0.2)
 		elif animation.has_animation("RESET"):
 			if animation.current_animation != "RESET":
 				animation.play("RESET", 0.2)
@@ -103,6 +116,7 @@ func _physics_process(delta: float) -> void:
 	
 	current_bob = current_bob.lerp(bob, delta * 10.0)
 	head.position = Vector3(0, cam_height, 0) + current_bob
+
 
 func crouching(delta: float) -> void:
 	var target_height = 1.5
