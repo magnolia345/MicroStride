@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://vpgaoevd0fc0"]
+
+[ext_resource type="Script" uid="uid://buixie7a1ykgh" path="res://Enemy.gd" id="1_4gyqm"]
+[ext_resource type="PackedScene" uid="uid://dldmbhh7lm3ty" path="res://Assets/Enemy/cat_walk.glb" id="1_7k104"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ey20"]
+size = Vector3(11.182617, 36.112663, 65.98503)
+
+[node name="Enemy" type="Node3D" unique_id=179015339]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=510682983]
+script = ExtResource("1_4gyqm")
+
+[node name="Sketchfab_Scene" parent="CharacterBody3D" unique_id=616990714 instance=ExtResource("1_7k104")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1570963556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.556332, 18.138403)
+shape = SubResource("BoxShape3D_8ey20")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D" unique_id=2026970862]
+target_position = Vector3(0, 0, 0)
+
+[editable path="CharacterBody3D/Sketchfab_Scene"]
