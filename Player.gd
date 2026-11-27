@@ -18,7 +18,7 @@ var held_object = null
 # Add these variables near the top of your player script
 var sync_position: Vector3 = Vector3.ZERO
 var sync_rotation: float = 0.0
-
+var spawn_point = position
 @onready var head: Node3D = $Head
 @onready var spring_arm: SpringArm3D = $Head/SpringArm3D
 @onready var camera: Camera3D = $Head/SpringArm3D/Camera3D
@@ -51,6 +51,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if tools.is_ancestor_of(raycast.get_collider()):
 			raycast.get_collider().hide()
 			held_object = raycast.get_collider
+	if Input.is_key_pressed(KEY_R) and not event.is_echo():
+		reset()
 func update_camera_mode() -> void:
 	if is_third_person:
 		spring_arm.spring_length = third_person_distance
@@ -130,4 +132,6 @@ func crouching(delta: float) -> void:
 	cam_height = lerp(cam_height, target_height, delta * 10.0)
 
 func reset() -> void:
-	position = Vector3(50, 2, 4)
+	position = spawn_point
+func checkpoint():
+	spawn_point = position

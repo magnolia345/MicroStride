@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bjv6wpqxd64bp"]
+
+[ext_resource type="Script" uid="uid://cv3fla1ykf0t6" path="res://Spikes.gd" id="1_jefjt"]
+[ext_resource type="Shader" uid="uid://bupyqgff84ihd" path="res://new_shader.gdshader" id="2_duv81"]
+[ext_resource type="Script" uid="uid://psvl6hvvv18w" path="res://Lava.gd" id="3_0b4v3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnw4l"]
+render_priority = 0
+shader = ExtResource("2_duv81")
+shader_parameter/deep_red = Color(0.85, 0.08, 0, 1)
+shader_parameter/bright_orange = Color(1, 0.35, 0, 1)
+shader_parameter/hot_yellow = Color(1, 0.85, 0.2, 1)
+shader_parameter/speed = 0.4
+shader_parameter/scale = 3.0
+shader_parameter/glow_strength = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_nnw4l"]
+size = Vector3(2.9140625, 0.064208984, 2.2626953)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t1ofx"]
+data = PackedVector3Array(-1.457, 0.0321, 1.1313, 1.457, 0.0321, 1.1313, -1.457, -0.0321, 1.1313, 1.457, 0.0321, 1.1313, 1.457, -0.0321, 1.1313, -1.457, -0.0321, 1.1313, 1.457, 0.0321, -1.1313, -1.457, 0.0321, -1.1313, 1.457, -0.0321, -1.1313, -1.457, 0.0321, -1.1313, -1.457, -0.0321, -1.1313, 1.457, -0.0321, -1.1313, 1.457, 0.0321, 1.1313, 1.457, 0.0321, -1.1313, 1.457, -0.0321, 1.1313, 1.457, 0.0321, -1.1313, 1.457, -0.0321, -1.1313, 1.457, -0.0321, 1.1313, -1.457, 0.0321, -1.1313, -1.457, 0.0321, 1.1313, -1.457, -0.0321, -1.1313, -1.457, 0.0321, 1.1313, -1.457, -0.0321, 1.1313, -1.457, -0.0321, -1.1313, 1.457, 0.0321, 1.1313, -1.457, 0.0321, 1.1313, 1.457, 0.0321, -1.1313, -1.457, 0.0321, 1.1313, -1.457, 0.0321, -1.1313, 1.457, 0.0321, -1.1313, -1.457, -0.0321, 1.1313, 1.457, -0.0321, 1.1313, -1.457, -0.0321, -1.1313, 1.457, -0.0321, 1.1313, 1.457, -0.0321, -1.1313, -1.457, -0.0321, -1.1313)
+
+[node name="Lava" type="Area3D" unique_id=300010641]
+script = ExtResource("1_jefjt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=457681882]
+material_override = SubResource("ShaderMaterial_nnw4l")
+mesh = SubResource("BoxMesh_nnw4l")
+script = ExtResource("3_0b4v3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1466704300]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_t1ofx")

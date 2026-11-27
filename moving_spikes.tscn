@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dgbxh7a0o3us2"]
+
+[ext_resource type="Script" uid="uid://wkhurhxmjnhq" path="res://Moving_Spikes.gd" id="1_5sxar"]
+[ext_resource type="PackedScene" uid="uid://c0y4pit70p0d4" path="res://spikes.tscn" id="2_7nqcn"]
+
+[node name="Moving Spikes" type="Node3D" unique_id=81199276]
+script = ExtResource("1_5sxar")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=461685101]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.53677034, 0, 0)
+use_collision = true
+size = Vector3(3.6961632, 1, 1)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=321633622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0457008, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=861507476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.055950046, 0, 0)
+size = Vector3(0.13415527, 1, 1)
+
+[node name="Spikes" parent="CSGCombiner3D" unique_id=620688602 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.30008447, 0, 0)
+
+[node name="Spikes2" parent="CSGCombiner3D" unique_id=240269090 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.30008447, 0.3273964, 0)
+
+[node name="Spikes4" parent="CSGCombiner3D" unique_id=1336641596 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.327, 0, 0)
+
+[node name="Spikes3" parent="CSGCombiner3D" unique_id=1769775304 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, 0, -0.327)
+
+[node name="Spikes6" parent="CSGCombiner3D" unique_id=1114138694 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, 0, 0.327)
+
+[node name="Spikes5" parent="CSGCombiner3D" unique_id=1808241463 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, -0.327, 0)
+
+[node name="Spikes7" parent="CSGCombiner3D" unique_id=600818628 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, -0.327, -0.327)
+
+[node name="Spikes10" parent="CSGCombiner3D" unique_id=613320210 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, 0.327, -0.327)
+
+[node name="Spikes8" parent="CSGCombiner3D" unique_id=1493547001 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, -0.327, 0.327)
+
+[node name="Spikes9" parent="CSGCombiner3D" unique_id=410737876 instance=ExtResource("2_7nqcn")]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0, 0, 0.8, 0.3, 0.327, 0.327)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1152849228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43401432, -0.034892797, -0.0705204)
+use_collision = true
+size = Vector3(0.9412079, 1, 1)
